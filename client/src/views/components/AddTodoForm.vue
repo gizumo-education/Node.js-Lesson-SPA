@@ -6,6 +6,7 @@
         type="text"
         name="title"
         autocomplete="off"
+        v-model="param.title"
         placeholder="Todoのタイトルを入力してね。">
     </div>
     <div class="register-input">
@@ -13,13 +14,42 @@
       <textarea
         name="content"
         rows="3"
+        v-model="param.content"
         placeholder="Todoの内容を入力してね。"></textarea>
     </div>
     <div class="register-submit">
-      <button class="register-submit-button">追加する</button>
+      <button
+       class="register-submit-button"
+       @click="addClick"
+      >
+        追加する
+      </button>
     </div>
   </form>
 </template>
+
+<script>
+  export default {
+    props: {
+      todo: {
+        type: Object,
+      },
+    },
+    data() {
+      return {
+        param: {
+          title: '',
+          content: '',
+        },
+      }
+    },
+    methods: {
+      addClick() {
+        return this.$emit('add-todo', this.param);
+      }
+    },
+  };
+</script>
 
 <style lang="scss" scoped>
 .register {

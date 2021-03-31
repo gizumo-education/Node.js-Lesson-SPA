@@ -81,5 +81,14 @@ export default new Vuex.Store({
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
     },
+    async addTodo({ dispatch }, todo) {
+      console.log(todo)
+      await axios.post(`${BASE_URL}/todo`, todo);
+      dispatch('updateTodoList');
+    },
+    async deleteTodo({ dispatch }, todo) {
+      await axios.delete(`${BASE_URL}/todo/${todo.id}`, todo);
+      dispatch('updateTodoList');
+    },
   },
 });
