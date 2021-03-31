@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
   };
 
   await Todo.addTodo(param);
-  res.status(200).send();
+  return res.status(200).send();
 });
 
 router.put('/:id', async (req, res) => {

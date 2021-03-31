@@ -44,29 +44,34 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-  // // 初回アクセスの場合
-  // if (to.name === 'login' && !from.name) {
-  //   return next();
-  // }
+// ログイン後リロードしてもユーザー情報が保持されるようになる
+// ログインしていない状態で/userや/homeにはアクセスできずに/loginにリダイレクトされる
+router.beforeEach(async (to, from, next) => {
+  // 初回アクセスの場合
+  // アクセス先が/loginかつ、初回なのでfrom.nameがない場合、next()につなげる
+  if (to.name === 'login' && !from.name) {
+    return next();
+  }
 
-//   await store.dispatch('checkAuthenticated');
-//   const { isAuthenticated } = store.getters;
+  // 下記２行でユーザーが認証済かどうかを取得
+  await store.dispatch('checkAuthenticated');
+  const { isAuthenticated } = store.getters;
 
-//   // isPublic でない場合(=認証が必要な場合)、かつ、ログインしていない場合
-//   if (!to.meta.isPublic && !isAuthenticated) {
-//     return next({
-//       name: 'login',
-//     });
-//   }
+  // isPublic でない場合(=認証が必要な場合)、かつ、ログインしていない場合
+  if (!to.meta.isPublic && !isAuthenticated) {
+    return next({
+      name: 'login',
+    });
+  }
 
-//   // ログイン済みのユーザーはログインページにアクセスできないようにする
-//   if (to.name === 'login' && isAuthenticated) {
-//     return next({
-//       name: 'home',
-//     });
-//   }
-//   return next();
-// });
+  // ログイン済みのユーザーはログインページにアクセスできないようにする
+  if (to.name === 'login' && isAuthenticated) {
+    return next({
+      name: 'home',
+    });
+  }
+  return next();
+});
+
 
 export default router;
