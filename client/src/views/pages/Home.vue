@@ -46,16 +46,12 @@ export default {
   methods: {
     ...mapActions([
       'addTodo',
-    ]),
-    ...mapActions([
       'updateTodo',
+      'deleteTodo',
     ]),
     ...mapActions({
       getTodoList: 'updateTodoList',
     }),
-    ...mapActions([
-      'deleteTodo',
-    ]),
   },
   computed: {
     ...mapGetters([
