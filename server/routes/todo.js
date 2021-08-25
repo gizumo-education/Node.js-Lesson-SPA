@@ -17,6 +17,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log('req.body:', req.body);
+  console.log('req.user:', req.user);
   const param = {
     title: req.body.title,
     content: req.body.content,
