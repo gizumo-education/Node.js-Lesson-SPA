@@ -40,6 +40,7 @@
         <button
           type="button"
           class="button button-delete"
+          @click="deleteTodo"
         >
           削除
         </button>
@@ -70,6 +71,9 @@ export default {
         return this.$emit('update-todo', this.todo);
       }
       return this.toggleEdit();
+    },
+    deleteTodo() {
+      return this.$emit('delete-todo', this.todo);
     },
     updateCompleted(todo) {
       this.todo.isCompleted = !this.todo.isCompleted;
