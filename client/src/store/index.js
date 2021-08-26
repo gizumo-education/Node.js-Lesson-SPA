@@ -19,6 +19,7 @@ export default new Vuex.Store({
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
     todoList: (state) => state.todoList,
+    completedTodos: (state) => state.todoList.filter((todo) => todo.isCompleted === 1),
   },
   mutations: {
     updateLoginUser(state, user) {
