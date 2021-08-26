@@ -41,6 +41,8 @@ export default {
         content: this.todo.content,
       };
       this.$store.dispatch('addTodo', param);
+      this.todo.title = '';
+      this.todo.content = '';
     },
   },
 };
