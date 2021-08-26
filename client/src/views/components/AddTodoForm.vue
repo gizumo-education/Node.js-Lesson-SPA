@@ -40,7 +40,7 @@ export default {
         title: this.todo.title,
         content: this.todo.content,
       };
-      this.$store.dispatch('addTodo', param);
+      this.$emit('add-todo', param);
       this.todo.title = '';
       this.todo.content = '';
     },
