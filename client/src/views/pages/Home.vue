@@ -2,7 +2,9 @@
   <div>
     <my-navi />
     <template>
-      <my-add-todo-form />
+      <my-add-todo-form
+        @add-todo="addTodo"
+      />
     </template>
     <template>
       <div class="list-status">
@@ -18,6 +20,7 @@
           :todo="todo"
           @update-completed="updateTodo(todo)"
           @update-todo="updateTodo(todo)"
+          @delete-todo="deleteTodo(todo)"
         />
       </ul>
     </template>
@@ -43,6 +46,8 @@ export default {
   methods: {
     ...mapActions([
       'updateTodo',
+      'deleteTodo',
+      'addTodo',
     ]),
     ...mapActions({
       getTodoList: 'updateTodoList',

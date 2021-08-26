@@ -71,6 +71,14 @@ export default new Vuex.Store({
         commit('updateIsAuthenticated', false);
       }
     },
+    async addTodo({ dispatch }, param) {
+      await axios.post(`${BASE_URL}/todo`, param);
+      dispatch('updateTodoList');
+    },
+    async deleteTodo({ dispatch }, todo) {
+      await axios.delete(`${BASE_URL}/todo/${todo.id}`);
+      dispatch('updateTodoList');
+    },
     async updateTodoList({ commit }) {
       const todoList = await axios
         .get(`${BASE_URL}/todo`)
