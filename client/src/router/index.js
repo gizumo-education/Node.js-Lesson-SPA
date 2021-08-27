@@ -4,6 +4,7 @@ import Login from '@/pages/Login.vue';
 import Home from '@/pages/Home.vue';
 import User from '@/pages/User.vue';
 import UserHome from '@/components/UserHome.vue';
+import UserList from '@/components/UserList.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -35,6 +36,11 @@ const routes = [
         name: 'userHome',
         component: UserHome,
       },
+      {
+        path: 'list',
+        name: 'userList',
+        component: UserList,
+      },
     ],
   },
 ];
@@ -44,29 +50,29 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-  // // 初回アクセスの場合
-  // if (to.name === 'login' && !from.name) {
-  //   return next();
-  // }
+router.beforeEach(async (to, from, next) => {
+  // 初回アクセスの場合
+  if (to.name === 'login' && !from.name) {
+    return next();
+  }
 
-//   await store.dispatch('checkAuthenticated');
-//   const { isAuthenticated } = store.getters;
+  await store.dispatch('checkAuthenticated');
+  const { isAuthenticated } = store.getters;
 
-//   // isPublic でない場合(=認証が必要な場合)、かつ、ログインしていない場合
-//   if (!to.meta.isPublic && !isAuthenticated) {
-//     return next({
-//       name: 'login',
-//     });
-//   }
+  // isPublic でない場合(=認証が必要な場合)、かつ、ログインしていない場合
+  if (!to.meta.isPublic && !isAuthenticated) {
+    return next({
+      name: 'login',
+    });
+  }
 
-//   // ログイン済みのユーザーはログインページにアクセスできないようにする
-//   if (to.name === 'login' && isAuthenticated) {
-//     return next({
-//       name: 'home',
-//     });
-//   }
-//   return next();
-// });
+  // ログイン済みのユーザーはログインページにアクセスできないようにする
+  if (to.name === 'login' && isAuthenticated) {
+    return next({
+      name: 'home',
+    });
+  }
+  return next();
+});
 
 export default router;

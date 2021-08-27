@@ -1,7 +1,8 @@
 <template>
   <div class="nav">
     <router-link to="/home">TodoList</router-link> |
-    <router-link :to="{ name: 'userHome' }">MyPage</router-link>
+    <router-link :to="{ name: 'userHome' }">MyPage</router-link> |
+    <router-link :to="{ name: 'userList' }">UserList</router-link>
   </div>
 </template>
 
