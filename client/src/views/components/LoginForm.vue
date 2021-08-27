@@ -1,5 +1,5 @@
 <template>
-  <form class="login-form" @submit.prevent="login">
+  <form class="login-form" @submit.prevent="$emit('login', user)">
     <div class="row">
       <label>
         username:
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -29,29 +28,7 @@ export default {
         password: '',
       },
     };
-  },
-  methods: {
-    login() {
-      const param = {
-        username: this.user.username,
-        password: this.user.password,
-      };
-      this.$store.dispatch('updateLoginUser', param);
-    },
-  },
-  computed: {
-    ...mapState([
-      'loginUser',
-      'isAuthenticated',
-    ]),
-  },
-  watch: {
-    isAuthenticated() {
-      if (this.isAuthenticated) {
-        this.$router.push({ name: 'home' });
-      }
-    },
-  },
+  }
 };
 </script>
 
