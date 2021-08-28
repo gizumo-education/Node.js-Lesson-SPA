@@ -77,6 +77,11 @@ export default new Vuex.Store({
           .get(`${BASE_URL}/todo`)
           .then(({ data }) => {
             commit('updateTodoList', data);
+            resolve();
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject();
           });
       });
     },
