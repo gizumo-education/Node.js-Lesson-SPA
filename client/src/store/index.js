@@ -74,8 +74,9 @@ export default new Vuex.Store({
     updateTodoList({ commit }) {
       axios
         .get(`${BASE_URL}/todo`)
-        .then(({ data }) => data);
-      commit('updateTodoList', todoList);
+        .then(({ data }) => {
+          commit('updateTodoList', data);
+        });
     },
     async updateTodo({ dispatch }, todo) {
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
