@@ -4,7 +4,6 @@ import Login from '@/pages/Login.vue';
 import Home from '@/pages/Home.vue';
 import User from '@/pages/User.vue';
 import UserHome from '@/components/UserHome.vue';
-import store from '../store';
 
 Vue.use(VueRouter);
 
