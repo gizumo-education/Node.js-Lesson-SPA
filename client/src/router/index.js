@@ -44,10 +44,10 @@ const router = new VueRouter({
 });
 
 // router.beforeEach(async (to, from, next) => {
-  // // 初回アクセスの場合
-  // if (to.name === 'login' && !from.name) {
-  //   return next();
-  // }
+// // 初回アクセスの場合
+// if (to.name === 'login' && !from.name) {
+//   return next();
+// }
 
 //   await store.dispatch('checkAuthenticated');
 //   const { isAuthenticated } = store.getters;
