@@ -36,11 +36,11 @@ export default {
         username: this.user.username,
         password: this.user.password,
       };
-      this.$store.dispatch('updateLoginUser', param);
+      this.$store.dispatch('user/updateLoginUser', param);
     },
   },
   computed: {
-    ...mapState([
+    ...mapState('user', [
       'loginUser',
       'isAuthenticated',
     ]),
