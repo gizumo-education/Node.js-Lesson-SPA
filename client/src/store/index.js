@@ -84,15 +84,6 @@ const todo = {
     },
   },
   actions: {
-  },
-};
-
-export default new Vuex.Store({
-  modules: {
-    user: user,
-    todo: todo,
-  },
-  actions: {
     async updateTodoList({ commit }) {
       const todoList = await axios
         .get(`${BASE_URL}/todo`)
@@ -103,5 +94,12 @@ export default new Vuex.Store({
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
     },
+  },
+};
+
+export default new Vuex.Store({
+  modules: {
+    user: user,
+    todo: todo,
   },
 });
