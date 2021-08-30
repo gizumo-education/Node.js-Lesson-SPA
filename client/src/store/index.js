@@ -19,23 +19,6 @@ const user = {
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
   },
-};
-
-const todo = {
-  namespaced: true,
-  state: {
-    todoList: [],
-  },
-  getters: {
-    todoList: (state) => state.todoList,
-  }
-};
-
-export default new Vuex.Store({
-  modules: {
-    user: user,
-    todo: todo,
-  },
   mutations: {
     updateLoginUser(state, user) {
       state.loginUser = user;
@@ -49,9 +32,28 @@ export default new Vuex.Store({
     updateIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
     },
+  },
+};
+
+const todo = {
+  namespaced: true,
+  state: {
+    todoList: [],
+  },
+  getters: {
+    todoList: (state) => state.todoList,
+  },
+  mutations: {
     updateTodoList(state, todoList) {
       state.todoList = todoList;
     },
+  }
+};
+
+export default new Vuex.Store({
+  modules: {
+    user: user,
+    todo: todo,
   },
   actions: {
     async updateLoginUser({ commit }, param) {
