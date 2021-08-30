@@ -99,7 +99,7 @@ const todo = {
 
 export default new Vuex.Store({
   modules: {
-    user: user,
-    todo: todo,
+    user,
+    todo,
   },
 });
