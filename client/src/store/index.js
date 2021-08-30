@@ -33,28 +33,6 @@ const user = {
       state.isAuthenticated = payload;
     },
   },
-};
-
-const todo = {
-  namespaced: true,
-  state: {
-    todoList: [],
-  },
-  getters: {
-    todoList: (state) => state.todoList,
-  },
-  mutations: {
-    updateTodoList(state, todoList) {
-      state.todoList = todoList;
-    },
-  }
-};
-
-export default new Vuex.Store({
-  modules: {
-    user: user,
-    todo: todo,
-  },
   actions: {
     async updateLoginUser({ commit }, param) {
       const res = await axios
@@ -70,6 +48,32 @@ export default new Vuex.Store({
         commit('updateIsAuthenticated', false);
       }
     },
+  },
+};
+
+const todo = {
+  namespaced: true,
+  state: {
+    todoList: [],
+  },
+  getters: {
+    todoList: (state) => state.todoList,
+  },
+  mutations: {
+    updateTodoList(state, todoList) {
+      state.todoList = todoList;
+    },
+  },
+  actions: {
+  },
+};
+
+export default new Vuex.Store({
+  modules: {
+    user: user,
+    todo: todo,
+  },
+  actions: {
     async logout({ commit }) {
       await axios.post(`${BASE_URL}/logout`);
       commit('resetLoginUser');
