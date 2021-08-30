@@ -48,6 +48,11 @@ const user = {
         commit('updateIsAuthenticated', false);
       }
     },
+    async logout({ commit }) {
+      await axios.post(`${BASE_URL}/logout`);
+      commit('resetLoginUser');
+      commit('updateIsAuthenticated', false);
+    },
   },
 };
 
@@ -74,11 +79,6 @@ export default new Vuex.Store({
     todo: todo,
   },
   actions: {
-    async logout({ commit }) {
-      await axios.post(`${BASE_URL}/logout`);
-      commit('resetLoginUser');
-      commit('updateIsAuthenticated', false);
-    },
     async checkAuthenticated({ commit }) {
       const res = await axios
         .get(`${BASE_URL}/user`)
