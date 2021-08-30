@@ -6,7 +6,19 @@ const BASE_URL = 'http://localhost:8080/api';
 
 Vue.use(Vuex);
 
+const user = {
+  namespaced: true,
+};
+
+const todo = {
+  namespaced: true,
+};
+
 export default new Vuex.Store({
+  modules: {
+    user: user,
+    todo: todo,
+  },
   state: {
     loginUser: {
       userName: '',
