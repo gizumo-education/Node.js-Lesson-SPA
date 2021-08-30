@@ -2,7 +2,7 @@ const path = require('path');
 const configureAPI = require('./server/config.js');
 
 module.exports = {
-  lintOnSave: false,
+  lintOnSave: true,
   devServer: {
     before: configureAPI,
   },
