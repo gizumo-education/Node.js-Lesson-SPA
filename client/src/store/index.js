@@ -8,29 +8,33 @@ Vue.use(Vuex);
 
 const user = {
   namespaced: true,
-};
-
-const todo = {
-  namespaced: true,
-};
-
-export default new Vuex.Store({
-  modules: {
-    user: user,
-    todo: todo,
-  },
   state: {
     loginUser: {
       userName: '',
       userId: null,
     },
     isAuthenticated: false,
-    todoList: [],
   },
   getters: {
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
+  },
+};
+
+const todo = {
+  namespaced: true,
+  state: {
+    todoList: [],
+  },
+  getters: {
     todoList: (state) => state.todoList,
+  }
+};
+
+export default new Vuex.Store({
+  modules: {
+    user: user,
+    todo: todo,
   },
   mutations: {
     updateLoginUser(state, user) {
