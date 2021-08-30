@@ -53,6 +53,20 @@ const user = {
       commit('resetLoginUser');
       commit('updateIsAuthenticated', false);
     },
+    async checkAuthenticated({ commit }) {
+      const res = await axios
+        .get(`${BASE_URL}/user`)
+        .then((resp) => resp)
+        .catch((err) => err.response);
+
+      if (res.status === 200) {
+        commit('updateLoginUser', res.data.user);
+        commit('updateIsAuthenticated', true);
+      } else {
+        commit('resetLoginUser');
+        commit('updateIsAuthenticated', false);
+      }
+    },
   },
 };
 
@@ -79,20 +93,6 @@ export default new Vuex.Store({
     todo: todo,
   },
   actions: {
-    async checkAuthenticated({ commit }) {
-      const res = await axios
-        .get(`${BASE_URL}/user`)
-        .then((resp) => resp)
-        .catch((err) => err.response);
-
-      if (res.status === 200) {
-        commit('updateLoginUser', res.data.user);
-        commit('updateIsAuthenticated', true);
-      } else {
-        commit('resetLoginUser');
-        commit('updateIsAuthenticated', false);
-      }
-    },
     async updateTodoList({ commit }) {
       const todoList = await axios
         .get(`${BASE_URL}/todo`)
