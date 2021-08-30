@@ -71,11 +71,19 @@ export default new Vuex.Store({
         commit('updateIsAuthenticated', false);
       }
     },
-    async updateTodoList({ commit }) {
-      const todoList = await axios
-        .get(`${BASE_URL}/todo`)
-        .then((res) => res.data);
-      commit('updateTodoList', todoList);
+    updateTodoList({ commit }) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${BASE_URL}/todo`)
+          .then(({ data }) => {
+            commit('updateTodoList', data);
+            resolve();
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject();
+          });
+      });
     },
     async updateTodo({ dispatch }, todo) {
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
