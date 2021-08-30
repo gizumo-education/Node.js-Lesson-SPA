@@ -6,19 +6,18 @@ const BASE_URL = 'http://localhost:8080/api';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const user = {
+  namespaced: true,
   state: {
     loginUser: {
       userName: '',
       userId: null,
     },
     isAuthenticated: false,
-    todoList: [],
   },
   getters: {
     loginUser: (state) => state.loginUser,
     isAuthenticated: (state) => state.isAuthenticated,
-    todoList: (state) => state.todoList,
   },
   mutations: {
     updateLoginUser(state, user) {
@@ -32,9 +31,6 @@ export default new Vuex.Store({
     },
     updateIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
-    },
-    updateTodoList(state, todoList) {
-      state.todoList = todoList;
     },
   },
   actions: {
@@ -71,6 +67,23 @@ export default new Vuex.Store({
         commit('updateIsAuthenticated', false);
       }
     },
+  },
+};
+
+const todo = {
+  namespaced: true,
+  state: {
+    todoList: [],
+  },
+  getters: {
+    todoList: (state) => state.todoList,
+  },
+  mutations: {
+    updateTodoList(state, todoList) {
+      state.todoList = todoList;
+    },
+  },
+  actions: {
     async updateTodoList({ commit }) {
       const todoList = await axios
         .get(`${BASE_URL}/todo`)
@@ -81,5 +94,12 @@ export default new Vuex.Store({
       await axios.put(`${BASE_URL}/todo/${todo.id}`, todo);
       dispatch('updateTodoList');
     },
+  },
+};
+
+export default new Vuex.Store({
+  modules: {
+    user,
+    todo,
   },
 });

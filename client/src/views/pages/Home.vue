@@ -41,15 +41,15 @@ export default {
     this.getTodoList();
   },
   methods: {
-    ...mapActions([
+    ...mapActions('todo', [
       'updateTodo',
     ]),
-    ...mapActions({
+    ...mapActions('todo', {
       getTodoList: 'updateTodoList',
     }),
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('todo', [
       'todoList',
     ]),
   },
